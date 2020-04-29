@@ -1,4 +1,4 @@
-package com.dvdkly.scalawithcats.typeclasses
+package com.dvdkly.scalawithcats.ch01.typeclasses
 
 object JsonTypeclass {
 
