@@ -1,5 +1,7 @@
 # Scala with Cats Code
 
+[![Continuous Integration](https://github.com/kellydavid/scala-with-cats-book/actions/workflows/ci.yml/badge.svg)](https://github.com/kellydavid/scala-with-cats-book/actions/workflows/ci.yml)
+
 Sandbox project for the exercises in the book [Scala with Cats][book].
 Based on the [cats-seed.g8][cats-seed] template by [Underscore][underscore].
 
