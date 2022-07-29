@@ -33,10 +33,12 @@ object JsonTypeclass {
     implicit val personWriter: JsonWriter[Person] =
       new JsonWriter[Person] {
         def write(value: Person): Json =
-          JsObject(Map(
-            "name" -> JsString(value.name),
-            "email" -> JsString(value.email)
-          ))
+          JsObject(
+            Map(
+              "name" -> JsString(value.name),
+              "email" -> JsString(value.email)
+            )
+          )
       }
     // etc...
   }
@@ -54,7 +56,7 @@ object JsonTypeclass {
   // Sometimes in the past, extension methods were referred to as "type enrichment" or "pimping".
 
   object JsonSyntax {
-    implicit class JsonWriterOps[A](value: A){
+    implicit class JsonWriterOps[A](value: A) {
       def toJson(implicit w: JsonWriter[A]): Json = w.write(value)
     }
   }
@@ -87,7 +89,6 @@ object JsonTypeclass {
     // implicitly can be a handy tool for debugging purposes when getting compiler errors about missing instances.
   }
 
-
   /*
   On Defining Typeclass Instances
   Instances can be packaged
@@ -103,11 +104,11 @@ object JsonTypeclass {
   // Lets just define a generic instance for Option[A] instead.
 
   object JsonWriterOptionInstance {
-    implicit def optionWriter[A](
-                                  implicit writer: JsonWriter[A]
-                                ): JsonWriter[Option[A]] = {
+    implicit def optionWriter[A](implicit
+        writer: JsonWriter[A]
+    ): JsonWriter[Option[A]] = {
       case Some(aValue) => writer.write(aValue)
-      case None => JsNull
+      case None         => JsNull
     }
   }
 
@@ -126,6 +127,5 @@ object JsonTypeclass {
   Passing non-implicit parameters to implicit methods is part of a Scala pattern called implicit conversion. This is
   generally frowned upon in modern scala code.
    */
-
 
 }

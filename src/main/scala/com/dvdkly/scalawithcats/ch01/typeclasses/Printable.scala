@@ -5,17 +5,21 @@ trait Printable[A] {
 }
 
 object PrintableInstances {
-  implicit val stringInstance: Printable[String] = (value: String) => s"String: $value"
+  implicit val stringInstance: Printable[String] = (value: String) =>
+    s"String: $value"
   implicit val intInstance: Printable[Int] = (value: Int) => s"Number: $value"
 }
 
 object Printable {
-  implicit def format[A](value: A)(implicit p: Printable[A]): String = p.format(value)
-  implicit def print[A](value: A)(implicit p: Printable[A]): Unit = println(p.format(value))
+  implicit def format[A](value: A)(implicit p: Printable[A]): String =
+    p.format(value)
+  implicit def print[A](value: A)(implicit p: Printable[A]): Unit = println(
+    p.format(value)
+  )
 }
 
 object PrintableSyntax {
-  implicit class PrintableOps[A](value: A){
+  implicit class PrintableOps[A](value: A) {
     def format(implicit p: Printable[A]): String = Printable.format(value)
     def print(implicit p: Printable[A]): Unit = Printable.print(value)
   }

@@ -34,7 +34,8 @@ object ShowCustomInstances {
 
   import cats.Show
 
-  implicit val dateShow: Show[Date] = (date: Date) => s"${date.getTime}ms since the epoch."
+  implicit val dateShow: Show[Date] = (date: Date) =>
+    s"${date.getTime}ms since the epoch."
 }
 
 object ShowConvenienceCustomInstances {
@@ -42,7 +43,8 @@ object ShowConvenienceCustomInstances {
 
   import cats.Show
 
-  implicit val dateShow: Show[Date] = Show.show(date => s"${date.getTime}ms since the epoch.")
+  implicit val dateShow: Show[Date] =
+    Show.show(date => s"${date.getTime}ms since the epoch.")
 }
 
 object ExerciseCatShow extends App {
@@ -51,7 +53,9 @@ object ExerciseCatShow extends App {
 
   final case class Cat(name: String, age: Int, color: String)
   object Cat {
-    implicit val showInstance: Show[Cat] = Show.show(cat => s"${cat.name} is a ${cat.age} year-old ${cat.color} cat.")
+    implicit val showInstance: Show[Cat] = Show.show(cat =>
+      s"${cat.name} is a ${cat.age} year-old ${cat.color} cat."
+    )
   }
 
   println(Cat("Tom", 3, "Ginger").show)

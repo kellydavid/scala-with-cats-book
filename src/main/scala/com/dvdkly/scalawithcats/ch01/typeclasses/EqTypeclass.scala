@@ -1,6 +1,5 @@
 package com.dvdkly.scalawithcats.ch01.typeclasses
 
-
 object ExerciseCompareInts extends App {
 
   import cats.Eq
@@ -19,8 +18,6 @@ object ExerciseCompareOptionInt extends App {
   import cats.syntax.eq._
   import cats.syntax.option._ // for nicer Option syntax
 
-
-
   println(3 === 3)
   println(1 === 2)
 
@@ -35,8 +32,8 @@ object CompareCustomTypes extends App {
   import cats.syntax.eq._
   import cats.instances.long._
 
-  implicit val dateEq: Eq[Date] = Eq.instance[Date]{
-    (date1, date2) => date1.getTime === date2.getTime
+  implicit val dateEq: Eq[Date] = Eq.instance[Date] { (date1, date2) =>
+    date1.getTime === date2.getTime
   }
 
   val x = Date.from(java.time.Instant.now())
@@ -58,8 +55,8 @@ object CatExercise extends App {
 
   final case class Cat(name: String, age: Int, color: String)
   object Cat {
-    implicit val eq: Eq[Cat] = Eq.instance[Cat]{
-      (cat1, cat2) => cat1.name === cat2.name && cat1.age === cat2.age && cat1.color === cat2.color
+    implicit val eq: Eq[Cat] = Eq.instance[Cat] { (cat1, cat2) =>
+      cat1.name === cat2.name && cat1.age === cat2.age && cat1.color === cat2.color
     }
   }
 

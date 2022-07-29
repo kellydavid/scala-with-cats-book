@@ -2,32 +2,32 @@ package com.dvdkly.scalawithcats.ch02
 
 object MonoidSemigroup {
 
-  /**
-   * Definition of a Monoid
-   *  - Can *combine* two elements (A, A) => A
-   *  - Has an *identity element* of type A
-   *
-   *  eg. for addition, the identity element is 0
-   *  eg. for multiplication the identity element is 1
-   *
-   *  A monoid must uphold two laws:
-   *  - Associativity eg 1 + 2 == 2 + 1
-   *  - Identity eg 1 + 0 == 1 , 2 * 1 == 2
-   *
-   * Integer subtraction is not a monoid because subtraction is not associative.
-   *
-   * Be careful writing instances of a typeclass as the instance must uphold the laws.
-   */
+  /** Definition of a Monoid
+    *   - Can *combine* two elements (A, A) => A
+    *   - Has an *identity element* of type A
+    *
+    * eg. for addition, the identity element is 0 eg. for multiplication the
+    * identity element is 1
+    *
+    * A monoid must uphold two laws:
+    *   - Associativity eg 1 + 2 == 2 + 1
+    *   - Identity eg 1 + 0 == 1 , 2 * 1 == 2
+    *
+    * Integer subtraction is not a monoid because subtraction is not
+    * associative.
+    *
+    * Be careful writing instances of a typeclass as the instance must uphold
+    * the laws.
+    */
 
-  /**
-   * Definition of a Semigroup
-   *  - Can *combine* two elements (A, A) => A
-   *
-   * Both Monoid and Semigroup can combine two elements.
-   * However, Semigroup has no identity element!
-   *
-   * Semigroup instance exists for NonEmptyList but not Monoid
-   */
+  /** Definition of a Semigroup
+    *   - Can *combine* two elements (A, A) => A
+    *
+    * Both Monoid and Semigroup can combine two elements. However, Semigroup has
+    * no identity element!
+    *
+    * Semigroup instance exists for NonEmptyList but not Monoid
+    */
 }
 
 object MonoidExercise {
@@ -59,13 +59,15 @@ object MonoidExercise {
     implicit val booleanXorMonoid: Monoid[Boolean] = new Monoid[Boolean] {
       override def empty: Boolean = false
 
-      override def combine(a: Boolean, b: Boolean): Boolean = (a && !b) || (!a && b)
+      override def combine(a: Boolean, b: Boolean): Boolean =
+        (a && !b) || (!a && b)
     }
 
     implicit val booleanXnorMonoid: Monoid[Boolean] = new Monoid[Boolean] {
       override def empty: Boolean = true
 
-      override def combine(a: Boolean, b: Boolean): Boolean = (a || !b) && (!a || b)
+      override def combine(a: Boolean, b: Boolean): Boolean =
+        (a || !b) && (!a || b)
     }
   }
 }
@@ -83,14 +85,15 @@ object AllSetForMonoidsExercise {
     def apply[A](implicit monoid: Monoid[A]): Monoid[A] =
       monoid
 
-
     implicit def setUnionMonoid[T]: Monoid[Set[T]] = new Monoid[Set[T]] {
       override def empty: Set[T] = Set.empty[T]
 
       override def combine(x: Set[T], y: Set[T]): Set[T] = x union y
     }
 
-    implicit def setIntersectionSemigroup[T]: Semigroup[Set[T]] = { (x: Set[T], y: Set[T]) => x intersect y }
+    implicit def setIntersectionSemigroup[T]: Semigroup[Set[T]] = {
+      (x: Set[T], y: Set[T]) => x intersect y
+    }
   }
 
 }
@@ -109,7 +112,8 @@ object CatsMonoidSemigroupInstances {
   val empty: String = Monoid[String].empty
   // ""
 
-  val semigroupHelloWorld: String = Semigroup[String].combine("Hello, ", "World!")
+  val semigroupHelloWorld: String =
+    Semigroup[String].combine("Hello, ", "World!")
   // Hello, World!
 
   val addition: Int = Monoid[Int].combine(30, 3)
@@ -156,7 +160,9 @@ object AddingAllTheThings {
     }
   }
 
-  val addOrders: Order = add(List(Order(3.3, 65), Order(4.5, 12), Order(9.2, 23)))
+  val addOrders: Order = add(
+    List(Order(3.3, 65), Order(4.5, 12), Order(9.2, 23))
+  )
 
 }
 
@@ -166,9 +172,7 @@ Commutativity - changing the order of operands does not change the result
 Associativity - changing the order of the operator does not change the result
  */
 
-/**
- * In Summary:
- *  - A Semigroup represents an addition or combination operation.
- *  - A monoid extends a Semigroup by adding an identity or "zero" element.
- */
-
+/** In Summary:
+  *   - A Semigroup represents an addition or combination operation.
+  *   - A monoid extends a Semigroup by adding an identity or "zero" element.
+  */
